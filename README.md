@@ -1,6 +1,15 @@
 # arXiv Semantic Search App
 
-This repository provides a semantic search application for arXiv articles, leveraging **PGVector** and **ChromaDB** for efficient vector search. The app allows users to compare query performance across the two databases and includes benchmarking capabilities.
+This repository provides a **semantic search application** for arXiv articles, allowing users to search and analyze a vast collection of scientific research efficiently. The application leverages **PGVector** (PostgreSQL vector extension) and **ChromaDB** for high-performance vector similarity search and benchmarking.
+
+![image](https://github.com/user-attachments/assets/a4a4ef46-0ceb-4af2-ab8d-392bac67d4f2)
+
+The app enables users to:
+- Perform **single query searches** across the arXiv dataset.
+- **Benchmark query latencies** using either manually entered queries or an uploaded query file.  
+- Visualize performance results through **plots**.
+- Compare query performance (latency) between **ChromaDB** and **PGVector**.
+
 
 ---
 
@@ -12,6 +21,36 @@ Before running the application, ensure the following dependencies and tools are 
    - Follow [pgvector installation guide](https://github.com/pgvector/pgvector) to set up `pgvector`.
 2. Python environment with all required libraries (details below).
 3. Kaggle credentials for downloading the arXiv dataset.
+
+---
+
+## Features
+
+### 1. **Single Query Search**
+   - Input any query, and the app will search through the arXiv dataset using **ChromaDB** or **PGVector**.
+   - Results include titles, abstracts, and the latency for the query.
+
+  ![image](https://github.com/user-attachments/assets/9272eae3-47b0-480f-acc7-13a421f49b9c)
+
+### 2. **Benchmarking Mode**
+   - Run performance benchmarks to compare **ChromaDB** and **PGVector** latencies.
+   - Two modes are supported:
+     - **Manual Queries**: Enter multiple queries manually.
+     - **Upload Query File**: Upload a `.txt` file containing multiple queries.
+   - Visualize latency results through **box plots**, **distributions**, and **latency-over-time charts**.
+
+  ![image](https://github.com/user-attachments/assets/50fc809b-cebd-45b6-b704-5e3f16e07401)
+
+### 3. **Performance Visualization**
+   - After running benchmarks, the app generates insightful visualizations:
+     - **Latency Distribution**: Density plots showing latency for both ChromaDB and PGVector.
+     ![image](https://github.com/user-attachments/assets/c811246c-7aa4-4268-bfac-a505eccce3db)
+
+     - **Latency Comparison**: Box plots comparing query response times.
+     ![image](https://github.com/user-attachments/assets/f9fce11a-e858-4dc2-bd03-2d193392743a)
+
+     - **Latency Over Queries**: Line charts illustrating how latencies evolve across queries.
+     ![image](https://github.com/user-attachments/assets/c54ffba7-874c-4129-93a0-1743301dcf17)
 
 ---
 
@@ -80,44 +119,6 @@ The repository includes `query_generation.py` for generating a `queries.txt` fil
   python query_generation.py
   ```
 - The default `queries.txt` file is already provided in the repository.
-
----
-
-## Using the App
-
-1. **Single Query Search**:
-   - Enter a query in the text box.
-   - Choose between **ChromaDB** and **PGVector**.
-   - The app will display the top results along with query performance metrics.
-
-2. **Benchmarking**:
-   - Select "Benchmarking" in the app.
-   - Choose to run queries manually or upload a `queries.txt` file.
-   - The app will measure and compare latencies for ChromaDB and PGVector.
-
-3. **Performance Metrics**:
-   - View latency distributions, average query times, and detailed visualizations.
-
----
-
-## Example
-
-1. **Setup PostgreSQL with pgvector**:
-   ```bash
-   CREATE EXTENSION IF NOT EXISTS vector;
-   ```
-2. **Run the notebook**:
-   - Prepare the arXiv data and store embeddings.
-
-3. **Run the Streamlit app**:
-   ```bash
-   streamlit run app.py
-   ```
-
-4. **Generate queries**:
-   ```bash
-   python query_generation.py
-   ```
 
 ---
 
